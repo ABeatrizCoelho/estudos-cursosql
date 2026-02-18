@@ -55,3 +55,18 @@ where IdProduto = 15
 
 --listta de transações adicionando uma coluna nova sinalizando "alto", "médio" e "baixo" para o valor dos pontos
 --[<10; <500, <=500]
+
+
+SELECT idCliente,
+        QtdePontos,
+        CASE
+        WHEN QtdePontos < 10 THEN 'Baixo'
+        WHEN QtdePontos < 500 THEN 'Medio'
+        WHEN QtdePontos >= 500 THEN 'Alto'
+        END AS nivel
+FROM
+transacoes
+WHERE DtCriacao >= '2026-01-01'
+AND DtCriacao <= '2026-01-31'
+GROUP BY IdCliente
+ORDER BY QtdePontos DESC
